@@ -1,0 +1,382 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+origins = [
+    "http://localhost:3000",
+    "localhost:3000",
+    "http://192.168.1.181:3000",
+    "192.168.1.181:3000",
+    "*"
+]
+
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
+)
+
+tn_alliances = [
+    {'alliance_id': '-1', 'alliance_name': 'Unknown', 'colorcode': '#4CAF50'},
+    {'alliance_id': '1', 'alliance_name': 'DMK+', 'colorcode': '#FF0000'},
+    {'alliance_id': '2', 'alliance_name': 'NDA', 'colorcode': '#e39c39ff'},
+    {'alliance_id': '3', 'alliance_name': 'TVK+', 'colorcode': '#FFFF00'},
+    {'alliance_id': '4', 'alliance_name': 'NTK', 'colorcode': '#db624d'},
+    {'alliance_id': '5', 'alliance_name': 'Others', 'colorcode': '#D3D3D3'},
+]
+tn_static = [
+        {'district': 'Thiruvallur', 'constituency_id': '1', 'constituency_name': 'Gummidipoondi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thiruvallur', 'constituency_id': '2', 'constituency_name': 'Ponneri(SC)', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thiruvallur', 'constituency_id': '3', 'constituency_name': 'Tiruttani', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thiruvallur', 'constituency_id': '4', 'constituency_name': 'Thiruvallur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thiruvallur', 'constituency_id': '5', 'constituency_name': 'Poonamallee(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thiruvallur', 'constituency_id': '6', 'constituency_name': 'Avadi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Chennai', 'constituency_id': '7', 'constituency_name': 'Maduravoyal', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '8', 'constituency_name': 'Ambattur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '9', 'constituency_name': 'Madavaram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '10', 'constituency_name': 'Thiruvottiyur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '11', 'constituency_name': 'Dr. Radhakrishnan Nagar', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '12', 'constituency_name': 'Perambur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '13', 'constituency_name': 'Kolathur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '14', 'constituency_name': 'Villivakkam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '15', 'constituency_name': 'Thiru-Vi-Ka-Nagar(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '16', 'constituency_name': 'Egmore(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '17', 'constituency_name': 'Royapuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '18', 'constituency_name': 'Harbour', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '19', 'constituency_name': 'Chepauk-Thiruvallikeni', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '20', 'constituency_name': 'Thousand Lights', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '21', 'constituency_name': 'Anna Nagar', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '22', 'constituency_name': 'Virugampakkam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '23', 'constituency_name': 'Saidapet', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '24', 'constituency_name': 'Thiyagaraya Nagar', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '25', 'constituency_name': 'Mylapore', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '26', 'constituency_name': 'Velachery', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '27', 'constituency_name': 'Shozhinganallur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chennai', 'constituency_id': '28', 'constituency_name': 'Alandur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Kancheepuram', 'constituency_id': '29', 'constituency_name': 'Sriperumbudur(SC)', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Chengalpattu', 'constituency_id': '30', 'constituency_name': 'Pallavaram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chengalpattu', 'constituency_id': '31', 'constituency_name': 'Tambaram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chengalpattu', 'constituency_id': '32', 'constituency_name': 'Chengalpattu', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chengalpattu', 'constituency_id': '33', 'constituency_name': 'Thiruporur', 'winner_party_prev': 'VCK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chengalpattu', 'constituency_id': '34', 'constituency_name': 'Cheyyur(SC)', 'winner_party_prev': 'VCK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Chengalpattu', 'constituency_id': '35', 'constituency_name': 'Maduranthakam(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Kancheepuram', 'constituency_id': '36', 'constituency_name': 'Uthiramerur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kancheepuram', 'constituency_id': '37', 'constituency_name': 'Kancheepuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Ranipet', 'constituency_id': '38', 'constituency_name': 'Arakkonam(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Ranipet', 'constituency_id': '39', 'constituency_name': 'Sholingur', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Ranipet', 'constituency_id': '41', 'constituency_name': 'Ranipet', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Ranipet', 'constituency_id': '42', 'constituency_name': 'Arcot', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Vellore', 'constituency_id': '40', 'constituency_name': 'Katpadi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Vellore', 'constituency_id': '43', 'constituency_name': 'Vellore', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Vellore', 'constituency_id': '44', 'constituency_name': 'Anaikattu', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Vellore', 'constituency_id': '45', 'constituency_name': 'Kilvaithinankuppam(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Vellore', 'constituency_id': '46', 'constituency_name': 'Gudiyattam(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tirupathur', 'constituency_id': '47', 'constituency_name': 'Vaniyambadi', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirupathur', 'constituency_id': '48', 'constituency_name': 'Ambur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirupathur', 'constituency_id': '49', 'constituency_name': 'Jolarpet', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirupathur', 'constituency_id': '50', 'constituency_name': 'Tirupattur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Krishnagiri', 'constituency_id': '51', 'constituency_name': 'Uthangarai(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Krishnagiri', 'constituency_id': '52', 'constituency_name': 'Bargur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Krishnagiri', 'constituency_id': '53', 'constituency_name': 'Krishnagiri', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Krishnagiri', 'constituency_id': '54', 'constituency_name': 'Veppanahalli', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Krishnagiri', 'constituency_id': '55', 'constituency_name': 'Hosur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Krishnagiri', 'constituency_id': '56', 'constituency_name': 'Thalli', 'winner_party_prev': 'CPI', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Dharmapuri', 'constituency_id': '57', 'constituency_name': 'Palacode', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dharmapuri', 'constituency_id': '58', 'constituency_name': 'Pennagaram', 'winner_party_prev': 'PMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dharmapuri', 'constituency_id': '59', 'constituency_name': 'Dharmapuri', 'winner_party_prev': 'PMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dharmapuri', 'constituency_id': '60', 'constituency_name': 'Pappireddippatti', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dharmapuri', 'constituency_id': '61', 'constituency_name': 'Harur(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tiruvannamalai', 'constituency_id': '62', 'constituency_name': 'Chengam(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '63', 'constituency_name': 'Tiruvannamalai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '64', 'constituency_name': 'Kilpennathur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '65', 'constituency_name': 'Kalasapakkam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '66', 'constituency_name': 'Polur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '67', 'constituency_name': 'Arani', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '68', 'constituency_name': 'Cheyyar', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvannamalai', 'constituency_id': '69', 'constituency_name': 'Vandavasi(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Villupuram', 'constituency_id': '70', 'constituency_name': 'Gingee', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Villupuram', 'constituency_id': '71', 'constituency_name': 'Mailam', 'winner_party_prev': 'PMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Villupuram', 'constituency_id': '72', 'constituency_name': 'Tindivanam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Villupuram', 'constituency_id': '73', 'constituency_name': 'Vanur(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Villupuram', 'constituency_id': '74', 'constituency_name': 'Villupuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Villupuram', 'constituency_id': '75', 'constituency_name': 'Vikravandi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Villupuram', 'constituency_id': '76', 'constituency_name': 'Tirukkoyilur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Kallakurichi', 'constituency_id': '77', 'constituency_name': 'Ulundurpettai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kallakurichi', 'constituency_id': '78', 'constituency_name': 'Rishivandiyam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kallakurichi', 'constituency_id': '79', 'constituency_name': 'Sankarapuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kallakurichi', 'constituency_id': '80', 'constituency_name': 'Kallakurichi(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Salem', 'constituency_id': '81', 'constituency_name': 'Gangavalli(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '82', 'constituency_name': 'Attur(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '83', 'constituency_name': 'Yercaud(ST)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '84', 'constituency_name': 'Omalur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '85', 'constituency_name': 'Mettur', 'winner_party_prev': 'PMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '86', 'constituency_name': 'Edappadi', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '87', 'constituency_name': 'Sankari', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '88', 'constituency_name': 'Salem (West)', 'winner_party_prev': 'PMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '89', 'constituency_name': 'Salem (North)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '90', 'constituency_name': 'Salem (South)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Salem', 'constituency_id': '91', 'constituency_name': 'Veerapandi', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Namakkal', 'constituency_id': '92', 'constituency_name': 'Rasipuram(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Namakkal', 'constituency_id': '93', 'constituency_name': 'Senthamangalam(ST)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Namakkal', 'constituency_id': '94', 'constituency_name': 'Namakkal', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Namakkal', 'constituency_id': '95', 'constituency_name': 'Paramathi-Velur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Namakkal', 'constituency_id': '96', 'constituency_name': 'Tiruchengode', 'winner_party_prev': 'KMDK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Namakkal', 'constituency_id': '97', 'constituency_name': 'Kumarapalayam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Erode', 'constituency_id': '98', 'constituency_name': 'Erode (East)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Erode', 'constituency_id': '99', 'constituency_name': 'Erode (West)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Erode', 'constituency_id': '100', 'constituency_name': 'Modakkurichi', 'winner_party_prev': 'BJP', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tiruppur', 'constituency_id': '101', 'constituency_name': 'Dharapuram(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruppur', 'constituency_id': '102', 'constituency_name': 'Kangayam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Erode', 'constituency_id': '103', 'constituency_name': 'Perundurai', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Erode', 'constituency_id': '104', 'constituency_name': 'Bhavani', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Erode', 'constituency_id': '105', 'constituency_name': 'Anthiyur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Erode', 'constituency_id': '106', 'constituency_name': 'Gobichettipalayam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Erode', 'constituency_id': '107', 'constituency_name': 'Bhavanisagar(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Nilgiris', 'constituency_id': '108', 'constituency_name': 'Udhagamandalam', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Nilgiris', 'constituency_id': '109', 'constituency_name': 'Gudalur(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Nilgiris', 'constituency_id': '110', 'constituency_name': 'Coonoor', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Coimbatore', 'constituency_id': '111', 'constituency_name': 'Mettupalayam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tiruppur', 'constituency_id': '112', 'constituency_name': 'Avanashi(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruppur', 'constituency_id': '113', 'constituency_name': 'Tiruppur (North)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruppur', 'constituency_id': '114', 'constituency_name': 'Tiruppur (South)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruppur', 'constituency_id': '115', 'constituency_name': 'Palladam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Coimbatore', 'constituency_id': '116', 'constituency_name': 'Sulur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '117', 'constituency_name': 'Kavundampalayam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '118', 'constituency_name': 'Coimbatore (North)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '119', 'constituency_name': 'Thondamuthur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '120', 'constituency_name': 'Coimbatore (South)', 'winner_party_prev': 'BJP', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '121', 'constituency_name': 'Singanallur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '122', 'constituency_name': 'Kinathukadavu', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '123', 'constituency_name': 'Pollachi', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Coimbatore', 'constituency_id': '124', 'constituency_name': 'Valparai(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tiruppur', 'constituency_id': '125', 'constituency_name': 'Udumalaipettai', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruppur', 'constituency_id': '126', 'constituency_name': 'Madathukulam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Dindigul', 'constituency_id': '127', 'constituency_name': 'Palani', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Dindigul', 'constituency_id': '128', 'constituency_name': 'Oddanchatram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Dindigul', 'constituency_id': '129', 'constituency_name': 'Athoor', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Dindigul', 'constituency_id': '130', 'constituency_name': 'Nilakottai(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dindigul', 'constituency_id': '131', 'constituency_name': 'Natham', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dindigul', 'constituency_id': '132', 'constituency_name': 'Dindigul', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Dindigul', 'constituency_id': '133', 'constituency_name': 'Vedasandur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Karur', 'constituency_id': '134', 'constituency_name': 'Aravakurichi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Karur', 'constituency_id': '135', 'constituency_name': 'Karur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Karur', 'constituency_id': '136', 'constituency_name': 'Krishnarayapuram(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Karur', 'constituency_id': '137', 'constituency_name': 'Kulithalai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tiruchirappalli', 'constituency_id': '138', 'constituency_name': 'Manapaarai', 'winner_party_prev': 'MNMK', 'winner_alliance_id_prev': '4', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '139', 'constituency_name': 'Srirangam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '140', 'constituency_name': 'Tiruchirappalli (West)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '141', 'constituency_name': 'Tiruchirappalli (East)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '142', 'constituency_name': 'Thiruverumbur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '143', 'constituency_name': 'Lalgudi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '144', 'constituency_name': 'Manachanallur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '145', 'constituency_name': 'Musiri', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruchirappalli', 'constituency_id': '146', 'constituency_name': 'Thuraiyur(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Perambalur', 'constituency_id': '147', 'constituency_name': 'Perambalur(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Perambalur', 'constituency_id': '148', 'constituency_name': 'Kunnam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Ariyalur', 'constituency_id': '149', 'constituency_name': 'Ariyalur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Ariyalur', 'constituency_id': '150', 'constituency_name': 'Jayankondam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Cuddalore', 'constituency_id': '151', 'constituency_name': 'Tittakudi(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '152', 'constituency_name': 'Vriddhachalam', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '153', 'constituency_name': 'Neyveli', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '154', 'constituency_name': 'Panruti', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '155', 'constituency_name': 'Cuddalore', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '156', 'constituency_name': 'Kurinjipadi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '157', 'constituency_name': 'Bhuvanagiri', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '158', 'constituency_name': 'Chidambaram', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Cuddalore', 'constituency_id': '159', 'constituency_name': 'Kattumannarkoil(SC)', 'winner_party_prev': 'VCK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Mayiladuthurai', 'constituency_id': '160', 'constituency_name': 'Sirkazhi(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Mayiladuthurai', 'constituency_id': '161', 'constituency_name': 'Mayiladuthurai', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Mayiladuthurai', 'constituency_id': '162', 'constituency_name': 'Poompuhar', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Nagapattinam', 'constituency_id': '163', 'constituency_name': 'Nagapattinam', 'winner_party_prev': 'VCK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Nagapattinam', 'constituency_id': '164', 'constituency_name': 'Kilvelur(SC)', 'winner_party_prev': 'CPI(M)', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Nagapattinam', 'constituency_id': '165', 'constituency_name': 'Vedaranyam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tiruvarur', 'constituency_id': '166', 'constituency_name': 'Thiruthuraipoondi(SC)', 'winner_party_prev': 'CPI', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvarur', 'constituency_id': '167', 'constituency_name': 'Mannargudi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvarur', 'constituency_id': '168', 'constituency_name': 'Thiruvarur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tiruvarur', 'constituency_id': '169', 'constituency_name': 'Nannilam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Thanjavur', 'constituency_id': '170', 'constituency_name': 'Thiruvidaimarudur(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '171', 'constituency_name': 'Kumbakonam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '172', 'constituency_name': 'Papanasam', 'winner_party_prev': 'MNMK', 'winner_alliance_id_prev': '4', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '173', 'constituency_name': 'Thiruvaiyaru', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '174', 'constituency_name': 'Thanjavur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '175', 'constituency_name': 'Orathanadu', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '176', 'constituency_name': 'Pattukkottai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thanjavur', 'constituency_id': '177', 'constituency_name': 'Peravurani', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Pudukottai', 'constituency_id': '178', 'constituency_name': 'Gandharvakottai(SC)', 'winner_party_prev': 'CPI(M)', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Pudukottai', 'constituency_id': '179', 'constituency_name': 'Viralimalai', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Pudukottai', 'constituency_id': '180', 'constituency_name': 'Pudukkottai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Pudukottai', 'constituency_id': '181', 'constituency_name': 'Thirumayam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Pudukottai', 'constituency_id': '182', 'constituency_name': 'Alangudi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Pudukottai', 'constituency_id': '183', 'constituency_name': 'Aranthangi', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Sivagangai', 'constituency_id': '184', 'constituency_name': 'Karaikudi', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Sivagangai', 'constituency_id': '185', 'constituency_name': 'Tiruppattur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Sivagangai', 'constituency_id': '', 'constituency_name': '(Sivaganga)', 'winner_party_prev': '', 'winner_alliance_id_prev': '', 'prediction_alliance_id_next': -1},
+        {'district': 'Sivagangai', 'constituency_id': '186', 'constituency_name': 'Sivaganga', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Sivagangai', 'constituency_id': '187', 'constituency_name': 'Manamadurai(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Madurai', 'constituency_id': '188', 'constituency_name': 'Melur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '189', 'constituency_name': 'Madurai East', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '190', 'constituency_name': 'Sholavandan(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '191', 'constituency_name': 'Madurai North', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '192', 'constituency_name': 'Madurai South', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '193', 'constituency_name': 'Madurai Central', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '194', 'constituency_name': 'Madurai West', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '195', 'constituency_name': 'Thiruparankundram', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '196', 'constituency_name': 'Tirumangalam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Madurai', 'constituency_id': '197', 'constituency_name': 'Usilampatti', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Theni', 'constituency_id': '198', 'constituency_name': 'Andipatti', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Theni', 'constituency_id': '199', 'constituency_name': 'Periyakulam(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Theni', 'constituency_id': '200', 'constituency_name': 'Bodinayakanur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Theni', 'constituency_id': '201', 'constituency_name': 'Cumbum', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Virudhunagar', 'constituency_id': '202', 'constituency_name': 'Rajapalayam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Virudhunagar', 'constituency_id': '203', 'constituency_name': 'Srivilliputhur(SC)', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Virudhunagar', 'constituency_id': '204', 'constituency_name': 'Sattur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Virudhunagar', 'constituency_id': '205', 'constituency_name': 'Sivakasi', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Virudhunagar', 'constituency_id': '206', 'constituency_name': 'Virudhunagar', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Virudhunagar', 'constituency_id': '207', 'constituency_name': 'Aruppukkottai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Virudhunagar', 'constituency_id': '208', 'constituency_name': 'Tiruchuli', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Ramanathapuram', 'constituency_id': '209', 'constituency_name': 'Paramakudi(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Ramanathapuram', 'constituency_id': '210', 'constituency_name': 'Tiruvadanai', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Ramanathapuram', 'constituency_id': '211', 'constituency_name': 'Ramanathapuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Ramanathapuram', 'constituency_id': '212', 'constituency_name': 'Mudhukulathur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Thoothukudi', 'constituency_id': '213', 'constituency_name': 'Vilathikulam', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thoothukudi', 'constituency_id': '214', 'constituency_name': 'Thoothukkudi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thoothukudi', 'constituency_id': '215', 'constituency_name': 'Tiruchendur', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thoothukudi', 'constituency_id': '216', 'constituency_name': 'Srivaikuntam', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thoothukudi', 'constituency_id': '217', 'constituency_name': 'Ottapidaram(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Thoothukudi', 'constituency_id': '218', 'constituency_name': 'Kovilpatti', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tenkasi', 'constituency_id': '219', 'constituency_name': 'Sankarankovil(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tenkasi', 'constituency_id': '220', 'constituency_name': 'Vasudevanallur(SC)', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tenkasi', 'constituency_id': '221', 'constituency_name': 'Kadayanallur', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tenkasi', 'constituency_id': '222', 'constituency_name': 'Tenkasi', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tenkasi', 'constituency_id': '223', 'constituency_name': 'Alangulam', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Tirunelveli', 'constituency_id': '224', 'constituency_name': 'Tirunelveli', 'winner_party_prev': 'BJP', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirunelveli', 'constituency_id': '225', 'constituency_name': 'Ambasamudram', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirunelveli', 'constituency_id': '226', 'constituency_name': 'Palayamkottai', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirunelveli', 'constituency_id': '227', 'constituency_name': 'Nanguneri', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Tirunelveli', 'constituency_id': '228', 'constituency_name': 'Radhapuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+        {'district': 'Kanniyakumari', 'constituency_id': '229', 'constituency_name': 'Kanniyakumari', 'winner_party_prev': 'AIADMK', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Kanniyakumari', 'constituency_id': '230', 'constituency_name': 'Nagercoil', 'winner_party_prev': 'BJP', 'winner_alliance_id_prev': '2', 'prediction_alliance_id_next': -1},
+        {'district': 'Kanniyakumari', 'constituency_id': '231', 'constituency_name': 'Colachel', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kanniyakumari', 'constituency_id': '232', 'constituency_name': 'Padmanabhapuram', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kanniyakumari', 'constituency_id': '233', 'constituency_name': 'Vilavancode', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+        {'district': 'Kanniyakumari', 'constituency_id': '234', 'constituency_name': 'Killiyoor', 'winner_party_prev': 'INC', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
+
+    ]
+@app.get("/", tags=["root"])
+async def read_root() -> dict:
+    return {"message": "Elections-Root."}
+
+@app.post("/tamilnadu/updatePrediction", tags=["updatePrediction"])
+async def update_prediction(data: dict) -> dict:
+    # print(data)
+    for item in tn_static:
+        if item['constituency_id'] == data['constituency_id']:
+            item['prediction_alliance_id_next'] = data['prediction_alliance_id_next']
+            break
+    return{
+        "data" : tn_static
+    }
+
+@app.get("/tamilnadu/static", tags=["tnstatic"])
+async def get_tnStatic() -> dict:
+    return {"data": 
+            tn_static}
+
+@app.get("/tamilnadu/alliances", tags=["tnAlliances"])
+async def get_tnAlliances() -> dict:
+    return {"data": 
+            tn_alliances}
+
+@app.get("/tamilnadu/allianceColorCode", tags=["tnAllianceColorCode"])
+async def get_tnAllianceColorCode() -> dict:
+    data = {}
+    for alliance in tn_alliances:
+        data[alliance['alliance_id']] = alliance['colorcode']
+        
+    return {"data": data}
+
+
+@app.get("/tamilnadu/predictedData", tags=["tnPredictedData"])
+async def get_tnPredictedData() -> dict:
+    data = []
+    dataDict = {}
+    for item in tn_static:
+        alliance_name = [a for a in tn_alliances if a['alliance_id'] == str(item['prediction_alliance_id_next'])][0]['alliance_name']
+        dataDict[alliance_name] = dataDict.get(alliance_name, 0) + 1
+    # print(dataDict)
+
+    for d in dataDict:
+        colorcode = [a for a in tn_alliances if a['alliance_name'] == d][0]['colorcode']
+        data.append({
+            'label': d,
+            'value': dataDict[d],
+            'color': colorcode
+        })
+    print(data)
+
+    return {"data": data}
+
+# def scrap():
+#     # print(tn_static)
+#     data = []
+#     dataDict = {}
+#     for item in tn_static:
+#         alliance_name = [a for a in tn_alliances if a['alliance_id'] == str(item['prediction_alliance_id_next'])][0]['alliance_name']
+#         dataDict[alliance_name] = dataDict.get(alliance_name, 0) + 1
+#     print(dataDict)
+
+#     for d in dataDict:
+#         colorcode = [a for a in tn_alliances if a['alliance_name'] == d][0]['colorcode']
+#         data.append({
+#             'label': d,
+#             'value': dataDict[d],
+#             'color': colorcode
+#         })
+#     print(data)
+# if __name__ == "__main__":
+#     scrap()
