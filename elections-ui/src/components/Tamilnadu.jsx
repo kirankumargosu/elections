@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import main_data from '../static/tamilnadu/data';
 import parties from '../static/tamilnadu/parties';
 import alliances from '../static/tamilnadu/alliances';
-
+import Button from "@mui/material/Button";
 const columns = [
   { id: 'district', label: 'District', minWidth: 170 },
   { id: 'constituency_name', label: '\u00a0Constituency', minWidth: 100 },
@@ -112,8 +112,30 @@ function Tamilnadu (props) {
     setPage(0);
   };
 
+  const handleClearAll = async () => {
+    try{
+      const tns = await fetch("http://localhost:8000/tamilnadu/resetPrediction", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(),
+      }).then(res => res.json());
+      setTnStatic(tns.data)
+          
+      props.onClickPredict()
+    } 
+    catch (error) {
+        console.log('Error', error)
+    }
+  }
+    
     // console.log(props.selectedParty)
     return (
+      <>
+      
+                  <Button variant="text" onClick={handleClearAll}>Clear All </Button>
+      
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -185,7 +207,7 @@ function Tamilnadu (props) {
                               <button
                               id = {row.constituency_id}
                               name = {row.constituency_name}
-                              style={{ backgroundColor: tnAllianceColorCode[row.prediction_alliance_id_next], color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer' }} 
+                              style={{ backgroundColor: tnAllianceColorCode[row.prediction_alliance_id_next], color: 'black', padding: '10px 20px', border: '2px solid black', borderRadius: '4px', cursor: 'pointer' }} 
                               onClick={(e) => {
                                 handlePrediction(e, row.constituency_id, 'reset');
                               }}
@@ -217,6 +239,7 @@ function Tamilnadu (props) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </>
     )
 }
 

@@ -15,6 +15,7 @@ export default function Legend(props) {
     <>
     {/* {console.log(selectedParty)}
     {console.log(props)} */}
+    {/* <div className="topnav"> */}
         <br/>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {alliances.map( (party) => {
@@ -54,6 +55,7 @@ export default function Legend(props) {
             })}
         </Grid>
       <br/>
+      {/* </div> */}
     </>
   );
 }

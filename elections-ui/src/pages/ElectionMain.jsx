@@ -5,6 +5,7 @@ import Mast from '../components/Mast'
 import Legend from '../components/Legend'
 import StraightAnglePieChart from '../components/StraightAnglePieChart'
 import PieChartWithPaddingAngle from '../components/PieChartWithPaddingAngle'
+
 function ElectionMain() {
 
     const [selectedParty, setSelectedParty] = useState(1);

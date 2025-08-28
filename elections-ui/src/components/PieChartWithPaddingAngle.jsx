@@ -26,7 +26,7 @@ function PieChartWithPaddingAngle(props) {
             paddingAngle: 3,
             innerRadius: 100,
             outerRadius: 600,
-            cy: '90%',
+            cy: '120%',
             data: props['predictedData'],
           },
         ]}

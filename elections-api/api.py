@@ -20,12 +20,12 @@ app.add_middleware(
 )
 
 tn_alliances = [
-    {'alliance_id': '-1', 'alliance_name': 'Unknown', 'colorcode': '#4CAF50'},
+    {'alliance_id': '-1', 'alliance_name': 'Unknown', 'colorcode': "#5B5C5B"},
     {'alliance_id': '1', 'alliance_name': 'DMK+', 'colorcode': '#FF0000'},
-    {'alliance_id': '2', 'alliance_name': 'NDA', 'colorcode': '#e39c39ff'},
+    {'alliance_id': '2', 'alliance_name': 'NDA', 'colorcode': '#F97D09'},
     {'alliance_id': '3', 'alliance_name': 'TVK+', 'colorcode': '#FFFF00'},
     {'alliance_id': '4', 'alliance_name': 'NTK', 'colorcode': '#db624d'},
-    {'alliance_id': '5', 'alliance_name': 'Others', 'colorcode': '#D3D3D3'},
+    {'alliance_id': '5', 'alliance_name': 'Others', 'colorcode': "#493D1C"},
 ]
 tn_static = [
         {'district': 'Thiruvallur', 'constituency_id': '1', 'constituency_name': 'Gummidipoondi', 'winner_party_prev': 'DMK', 'winner_alliance_id_prev': '1', 'prediction_alliance_id_next': -1},
@@ -361,6 +361,13 @@ async def get_tnPredictedData() -> dict:
 
     return {"data": data}
 
+@app.post("/tamilnadu/resetPrediction", tags=["resetPrediction"])
+async def reset_prediction() -> dict:
+    for item in tn_static:
+        item['prediction_alliance_id_next'] = -1
+    return{
+        "data" : tn_static
+    }
 # def scrap():
 #     # print(tn_static)
 #     data = []
