@@ -1,3 +1,4 @@
+import  '../css/Parties.css'
 import { useEffect, useState } from "react";
 
 export default function Parties(props) {
@@ -13,9 +14,8 @@ export default function Parties(props) {
             const url = "http://localhost:8000/tamilnadu/alliancePartyData/"+props.selectedAlliance
             try {
                 const tnParties = await fetch(url).then(res => res.json());
-                // console.log(tnParties)
+                console.log(tnParties)
                 setParties(tnParties.data)
-
             } catch (error) {
                 console.log('Error', error)
             }
@@ -26,8 +26,19 @@ export default function Parties(props) {
 
   return (
     <>
-        <br/>
-            {parties.map( (party) => {
+        {/* <br/> */}
+        {parties.map((party, p) => 
+          { return (
+              <button className = "partySpan"
+              style={{backgroundColor : party.colorcode}}
+                      key={party.party_id} 
+                      >
+                {party.party_name}
+              </button>
+            )
+          }
+        )}
+            {/* {parties.map( (party) => {
                 return (
                           <div key={party.party_id}>
                             <button 
@@ -47,8 +58,8 @@ export default function Parties(props) {
                             </button>
                             </div>
                          )
-            })}
-      <br/>
+            })} */}
+      {/* <br/> */}
     </>
   );
 }

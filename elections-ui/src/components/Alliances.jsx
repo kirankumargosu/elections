@@ -28,7 +28,7 @@ export default function Alliances(props) {
 
   return (
     <>
-        <br/>
+        {/* <br/> */}
             {allianceData.map( (alliance) => {
                 return (
                           selectedAlliance == alliance.alliance_id ?
@@ -71,7 +71,7 @@ export default function Alliances(props) {
                             </div>
                          )
             })}
-      <br/>
+      {/* <br/> */}
     </>
   );
 }

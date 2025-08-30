@@ -43,6 +43,7 @@ function Tamilnadu (props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   const [tnData, setTnData] = React.useState([])
+  const [tnDataForDistrict, setTnDataForDistrict] = React.useState([])
   const [tnAllianceColorCode, setTnAllianceColorCode] = React.useState({})
   const [tnDistricts, setTnDistricts] = React.useState([])
   const [selectedDistrict, setSelectedDistrict] = React.useState(23)
@@ -53,6 +54,18 @@ function Tamilnadu (props) {
       try {
         const tns = await fetch(url).then(res => res.json());
         setTnData(tns.data)
+
+      } catch (error) {
+        console.log('Error', error)
+      }
+    }
+
+    async function fetchTnStaticDataForDistrict() {
+      const url = "http://localhost:8000/tamilnadu/static/" + selectedDistrict
+      try {
+        const tns = await fetch(url).then(res => res.json());
+        console.log(tns.data)
+        setTnDataForDistrict(tns.data)
 
       } catch (error) {
         console.log('Error', error)
@@ -98,6 +111,7 @@ function Tamilnadu (props) {
     fetchTnStaticData();
     fetchTnDistrictsData();
     // fetchTnAlliancesData();
+    fetchTnStaticDataForDistrict();
     fetchTnAlliancesColorCodeData();
   }, []);
 
@@ -146,9 +160,23 @@ function Tamilnadu (props) {
     }
   }
 
+  
+  const fetchTnStaticDataForDistrict = async () => {
+      console.log(selectedDistrict)
+      const url = "http://localhost:8000/tamilnadu/static/" + selectedDistrict
+      try {
+        const tns = await fetch(url).then(res => res.json());
+        console.log(tns.data)
+        setTnDataForDistrict(tns.data)
+
+      } catch (error) {
+        console.log('Error', error)
+      }
+    }
   const handleDistrictSelect = async (dist) => {
     // console.log(dist)
     setSelectedDistrict(dist)
+    fetchTnStaticDataForDistrict()
   }
     
     // console.log(props.selectedParty)
@@ -208,6 +236,10 @@ function Tamilnadu (props) {
                 </TableCell>
               </TableRow>
             </TableHead>
+
+            <TableBody>
+              
+            </TableBody>
           </Table>
         </TableContainer>
         

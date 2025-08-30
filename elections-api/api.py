@@ -24,7 +24,7 @@ tn_alliances = [
     {'alliance_id': -1, 'alliance_name': 'Unknown', 'colorcode': "#5B5C5B"},
     {'alliance_id': 1, 'alliance_name': 'DMK+', 'colorcode': '#FF0000'},
     {'alliance_id': 2, 'alliance_name': 'NDA', 'colorcode': '#F97D09'},
-    {'alliance_id': 3, 'alliance_name': 'TVK+', 'colorcode': '#FFFF00'},
+    {'alliance_id': 3, 'alliance_name': 'TVK', 'colorcode': '#FFFF00'},
     {'alliance_id': 4, 'alliance_name': 'NTK', 'colorcode': "#621515"},
     {'alliance_id': 5, 'alliance_name': 'Others', 'colorcode': "#493D1C"},
 ]
@@ -312,24 +312,40 @@ tn_parties = [
     {'party_id': 2, 'party_name': 'INC', 'colorcode': "#2D09F9"},
     {'party_id': 3, 'party_name': 'VCK', 'colorcode': "#196ED0"},
     {'party_id': 4, 'party_name': 'AIADMK', 'colorcode': "#199C19"},
-    {'party_id': 5, 'party_name': 'CPI', 'colorcode': ''},
-    {'party_id': 6, 'party_name': 'PMK', 'colorcode': ''},
-    {'party_id': 7, 'party_name': 'KMDK', 'colorcode': ''},
+    {'party_id': 5, 'party_name': 'CPI', 'colorcode': '#DE0000'},
+    {'party_id': 6, 'party_name': 'PMK', 'colorcode': '#FFFF00'},
+    {'party_id': 7, 'party_name': 'KMDK', 'colorcode': '#17560A'},
     {'party_id': 8, 'party_name': 'BJP', 'colorcode': '#F97D09'},
-    {'party_id': 9, 'party_name': 'MNMK', 'colorcode': ''},
-    {'party_id': 10, 'party_name': 'CPI(M)', 'colorcode': ''},
+    {'party_id': 9, 'party_name': 'MMK', 'colorcode': ''},
+    {'party_id': 10, 'party_name': 'CPI(M)', 'colorcode': '#cc0d0d'},
     {'party_id': 11, 'party_name': 'NTK', 'colorcode': '#621515'},
     {'party_id': 12, 'party_name': 'TVK', 'colorcode': '#FFFF00'},
-    {'party_id': 13, 'party_name': 'MDMK', 'colorcode': ''},
-    {'party_id': 14, 'party_name': 'DMDK', 'colorcode': ''},
-    {'party_id': 15, 'party_name': 'Others', 'colorcode': '#5B5C5B'}
+    {'party_id': 13, 'party_name': 'MDMK', 'colorcode': '#FC0000'},
+    {'party_id': 14, 'party_name': 'DMDK', 'colorcode': '#FFFF00'},
+    {'party_id': 15, 'party_name': 'Others', 'colorcode': '#5B5C5B'},
+    {'party_id': 16, 'party_name': 'IUML', 'colorcode': '#006600'},
+    {'party_id': 17, 'party_name': 'DMK+ Others', 'colorcode': '#FF0000'},
+    {'party_id': 18, 'party_name': 'AIADMKTUMK', 'colorcode': '#199C19'},
+    {'party_id': 19, 'party_name': 'AMMK', 'colorcode': '#228B22'},
+    {'party_id': 20, 'party_name': 'TMC(M)', 'colorcode': '#FFA500'},
+    {'party_id': 21, 'party_name': 'PTMK', 'colorcode': ''},
+    {'party_id': 22, 'party_name': 'RPI', 'colorcode': '#0000FF'},
+    {'party_id': 23, 'party_name': 'IJK', 'colorcode': '#F08080'},
+    {'party_id': 24, 'party_name': 'PT', 'colorcode': '#CF0922'},
+    {'party_id': 25, 'party_name': 'TMMK', 'colorcode': '#FF0000'},
+    {'party_id': 26, 'party_name': 'PBK', 'colorcode': '#0000FF'},
+    {'party_id': 27, 'party_name': 'PNK', 'colorcode': '#FF8C00'},
+    {'party_id': 28, 'party_name': 'NDA Others', 'colorcode': '#F97D09'},
+    {'party_id': 29, 'party_name': 'MNM', 'colorcode': '#FF0000'}
+        
 ]
 
 tn_alliance_map = {
-    1: [1, 2, 3, 5, ], # DMK+
-    2: [4, 8, ], # NDA
+    1: [1, 2, 13, 3, 16, 5, 10, 29, 7, 9, 17, ], # DMK+
+    2: [4, 8, 6, 14, 20, 19, 21, 27, 26, 25, 22, 23, 24, 18, 28,  ], # NDA
     3: [12, ], # TVK+
     4: [11, ], # NTK+
+    5: [15, ], # Others
 }
 
 tn_static = [
@@ -615,6 +631,49 @@ async def read_root() -> dict:
 async def get_tnDistricts() -> dict:
     return {"data": tn_districts}
 
+@app.get("/tamilnadu/static/{district_id}", tags=["staticForDistrict"])
+async def get_tnStaticForDistrict(district_id) -> dict:
+    data = []
+    global tn_data
+    tn_data = []
+    print("district id called")
+    print(district_id)
+    for item in tn_static:
+        alliance_name = ''
+        party_name = ''
+        district_name = ''
+        if (item["district_id"] == int(district_id)):
+            for d in tn_districts:
+                if (d['district_id'] == item['district_id']):
+                    district_name = d['district_name']
+                    break
+            for a in tn_alliances:
+                if (a['alliance_id'] == item['winner_alliance_id_prev']):
+                    alliance_name = a['alliance_name']
+                    break
+            
+            for p in tn_parties:
+                if (p['party_id'] == item['winner_party_id_prev']):
+                    party_name = p['party_name']
+                    break
+
+            tn_data.append(
+                {'district_id': item['district_id'],
+                'district': district_name,
+                'constituency_id': item['constituency_id'],
+                'constituency_name': tn_constituencies[item['constituency_id']],
+                'winner_alliance_prev': alliance_name,
+                'winner_party_prev': party_name,
+                "prediction_alliance_id_next": item['prediction_alliance_id_next']
+                }
+            )
+        # print("tn data >>>>", tn_data)
+    return {"data": 
+            tn_data}
+# @app.get("/tamilnadu/alliancePartyData/{alliance_id}", tags=["alliancePartyData"])
+
+
+
 @app.get("/tamilnadu/static", tags=["tnstatic"])
 async def get_tnStatic() -> dict:
     # data = []
@@ -687,10 +746,6 @@ async def get_tnAlliances() -> dict:
 @app.get("/tamilnadu/alliancePartyData/{alliance_id}", tags=["alliancePartyData"])
 async def get_tnAlliancePartyData(alliance_id) -> dict:
     data = []
-    print(alliance_id)
-    print(type(alliance_id))
-    print(tn_alliance_map)
-    print(tn_alliance_map[int(alliance_id)])
     for alliancePartyId in tn_alliance_map[int(alliance_id)]:
         for p in tn_parties:
             if p['party_id'] == alliancePartyId:
