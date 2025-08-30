@@ -29,46 +29,46 @@ tn_alliances = [
     {'alliance_id': 5, 'alliance_name': 'Others', 'colorcode': "#493D1C"},
 ]
 
-tn_districts = {
-    1 : 'Thiruvallur',
-    2 : 'Chennai',
-    3 : 'Kancheepuram',
-    4 : 'Chengalpattu',
-    5 : 'Ranipet',
-    6 : 'Vellore',
-    7 : 'Tirupathur',
-    8 : 'Krishnagiri',
-    9 : 'Dharmapuri',
-    10 : 'Tiruvannamalai',
-    11 : 'Villupuram',
-    12 : 'Kallakurichi',
-    13 : 'Salem',
-    14 : 'Namakkal',
-    15 : 'Erode',
-    16 : 'Tiruppur',
-    17 : 'Nilgiris',
-    18 : 'Coimbatore',
-    19 : 'Dindigul',
-    20 : 'Karur',
-    21 : 'Tiruchirappalli',
-    22 : 'Perambalur',
-    23 : 'Ariyalur',
-    24 : 'Cuddalore',
-    25 : 'Mayiladuthurai',
-    26 : 'Nagapattinam',
-    27 : 'Tiruvarur',
-    28 : 'Thanjavur',
-    29 : 'Pudukottai',
-    30 : 'Sivagangai',
-    31 : 'Madurai',
-    32 : 'Theni',
-    33 : 'Virudhunagar',
-    34 : 'Ramanathapuram',
-    35 : 'Thoothukudi',
-    36 : 'Tenkasi',
-    37 : 'Tirunelveli',
-    38 : 'Kanniyakumari'
-}
+tn_districts = [
+    {'district_id' : 1, 'district_name' : 'Thiruvallur'},
+    {'district_id' : 2, 'district_name' : 'Chennai'},
+    {'district_id' : 3, 'district_name' : 'Kancheepuram'},
+    {'district_id' : 4, 'district_name' : 'Chengalpattu'},
+    {'district_id' : 5, 'district_name' : 'Ranipet'},
+    {'district_id' : 6, 'district_name' : 'Vellore'},
+    {'district_id' : 7, 'district_name' : 'Tirupathur'},
+    {'district_id' : 8, 'district_name' : 'Krishnagiri'},
+    {'district_id' : 9, 'district_name' : 'Dharmapuri'},
+    {'district_id' : 10 , 'district_name' : 'Tiruvannamalai'},
+    {'district_id' : 11 , 'district_name' : 'Villupuram'},
+    {'district_id' : 12 , 'district_name' : 'Kallakurichi'},
+    {'district_id' : 13 , 'district_name' : 'Salem'},
+    {'district_id' : 14 , 'district_name' : 'Namakkal'},
+    {'district_id' : 15 , 'district_name' : 'Erode'},
+    {'district_id' : 16 , 'district_name' : 'Tiruppur'},
+    {'district_id' : 17 , 'district_name' : 'Nilgiris'},
+    {'district_id' : 18 , 'district_name' : 'Coimbatore'},
+    {'district_id' : 19 , 'district_name' : 'Dindigul'},
+    {'district_id' : 20 , 'district_name' : 'Karur'},
+    {'district_id' : 21 , 'district_name' : 'Tiruchirappalli'},
+    {'district_id' : 22 , 'district_name' : 'Perambalur'},
+    {'district_id' : 23 , 'district_name' : 'Ariyalur'},
+    {'district_id' : 24 , 'district_name' : 'Cuddalore'},
+    {'district_id' : 25 , 'district_name' : 'Mayiladuthurai'},
+    {'district_id' : 26 , 'district_name' : 'Nagapattinam'},
+    {'district_id' : 27 , 'district_name' : 'Tiruvarur'},
+    {'district_id' : 28 , 'district_name' : 'Thanjavur'},
+    {'district_id' : 29 , 'district_name' : 'Pudukottai'},
+    {'district_id' : 30 , 'district_name' : 'Sivagangai'},
+    {'district_id' : 31 , 'district_name' : 'Madurai'},
+    {'district_id' : 32 , 'district_name' : 'Theni'},
+    {'district_id' : 33 , 'district_name' : 'Virudhunagar'},
+    {'district_id' : 34 , 'district_name' : 'Ramanathapuram'},
+    {'district_id' : 35 , 'district_name' : 'Thoothukudi'},
+    {'district_id' : 36 , 'district_name' : 'Tenkasi'},
+    {'district_id' : 37 , 'district_name' : 'Tirunelveli'},
+    {'district_id' : 38 , 'district_name' : 'Kanniyakumari'}
+]
 
 tn_constituencies = {
                         1: 'Gummidipoondi',
@@ -611,6 +611,10 @@ tn_data = []
 async def read_root() -> dict:
     return {"message": "Elections-Root."}
 
+@app.get("/tamilnadu/districts", tags=["districts"])
+async def get_tnDistricts() -> dict:
+    return {"data": tn_districts}
+
 @app.get("/tamilnadu/static", tags=["tnstatic"])
 async def get_tnStatic() -> dict:
     # data = []
@@ -619,6 +623,12 @@ async def get_tnStatic() -> dict:
     for item in tn_static:
         alliance_name = ''
         party_name = ''
+        district_name = ''
+
+        for d in tn_districts:
+            if (d['district_id'] == item['district_id']):
+                district_name = d['district_name']
+                break
         for a in tn_alliances:
             if (a['alliance_id'] == item['winner_alliance_id_prev']):
                 alliance_name = a['alliance_name']
@@ -630,7 +640,8 @@ async def get_tnStatic() -> dict:
                 break
 
         tn_data.append(
-            {'district': tn_districts[item['district_id']],
+            {'district_id': item['district_id'],
+             'district': district_name,
              'constituency_id': item['constituency_id'],
              'constituency_name': tn_constituencies[item['constituency_id']],
              'winner_alliance_prev': alliance_name,
