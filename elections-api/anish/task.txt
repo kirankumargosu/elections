@@ -1,0 +1,9 @@
+task1:
+read input.csv and write into output.csv
+
+task2:
+read input.csv and write into output.csv by giving 10% hike in emp_sal
+emp_id,emp_name,emp_sal
+1,Anish,1000000
+2,Sujatha,1000
+3,Chandra,2000000
