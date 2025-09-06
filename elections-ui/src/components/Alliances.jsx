@@ -4,6 +4,7 @@ import * as React from 'react';
 
 export default function Alliances(props) {
   const [selectedAlliance, setSelectedAlliance] = useState(1)
+  
   const handleAllianceSelect =  (e) => {
     setSelectedAlliance(parseInt(e.target.id))
     props.onSelectAlliance(parseInt(e.target.id))
@@ -47,7 +48,6 @@ export default function Alliances(props) {
                                 onClick={(e) => handleAllianceSelect(e)} 
                                 >
                                   {alliance.alliance_name}
-                                  
                             </button>
                             </div>
                          :

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as React from 'react';
+
 import Tamilnadu from '../components/Tamilnadu'
 import Mast from '../components/Mast'
 import Alliances from '../components/Alliances';
@@ -10,11 +10,13 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
+import Districts from "../components/Districts";
 
 function ElectionMain() {
 
     const [selectedAlliance, setSelectedAlliance] = useState(1);
-    const [predictedData, setPredictedData] = React.useState([]);
+    const [predictedData, setPredictedData] = useState([]);
+    const [selectedDistrict, setSelectedDistrict] = useState(23);
 
     useEffect(() => {
         async function fetchPredictedData() {
@@ -47,6 +49,11 @@ function ElectionMain() {
         setSelectedAlliance(allianceId)
     }
     
+    const handleDistrictChange = async (districtId) => {
+        // console.log("district changed", districtId)
+        setSelectedDistrict(districtId)
+    }
+
     return (
         
         <>
@@ -54,14 +61,14 @@ function ElectionMain() {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow sx={{
-                  "& th": {
-                  color: '#f1f1f7ff',
-                  backgroundColor: '#0c4a13ff',
-                  font: 'bold',
-                  fontfamily: 'Arial',
-                  fontSize: 16
-                }
-              }}>  
+                        "& th": {
+                        color: '#f1f1f7ff',
+                        backgroundColor: '#0c4a13ff',
+                        font: 'bold',
+                        fontfamily: 'Arial',
+                        fontSize: 16
+                        }
+                    }}>  
                         <TableCell align="center" width={"20%"}>Alliances</TableCell>
                         <TableCell align="center" width={"60%"}>Prediction</TableCell>
                         <TableCell align="center" width={"20%"}>Parties</TableCell>
@@ -69,19 +76,20 @@ function ElectionMain() {
                 </TableHead>
                 <TableBody>
                     <TableRow>  
-                        <TableCell align="center">
+                        <TableCell align="center" style={{ minWidth: 100}}>
                             <Alliances onSelectAlliance= {handleAllianceChange}/>
                         </TableCell>
                         <TableCell align="center">
                             <PieChartData predictedData = {predictedData}/>
                         </TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center" style={{ minWidth: 400}}>
                             <Parties selectedAlliance = {selectedAlliance}/>
                         </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
-            <Tamilnadu selectedAlliance = {selectedAlliance} onClickPredict = {handlePredictonData}/>
+            <Districts onSelectDistrict = {handleDistrictChange}/>
+            <Tamilnadu selectedAlliance = {selectedAlliance} selectedDistrict = {selectedDistrict} onClickPredict = {handlePredictonData}/>
         </>
     )
 }

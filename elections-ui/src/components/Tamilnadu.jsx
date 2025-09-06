@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import * as React from 'react';
 import '../css/Tamilnadu.css'
 
 import Paper from '@mui/material/Paper';
@@ -11,9 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from "@mui/material/Button";
+import Tab from "@mui/material/Tab";
 
 const columns = [
-  { id: 'SNo', label: 'S.No', minWidth: 10 },
+  // { id: 'SNo', label: 'S.No', minWidth: 10 },
   { id: 'district', label: 'District', minWidth: 170 },
   { id: 'constituency_name', label: '\u00a0Constituency', minWidth: 100 },
   {
@@ -40,13 +40,13 @@ const columns = [
   },
 ];
 function Tamilnadu (props) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(50);
-  const [tnData, setTnData] = React.useState([])
-  const [tnDataForDistrict, setTnDataForDistrict] = React.useState([])
-  const [tnAllianceColorCode, setTnAllianceColorCode] = React.useState({})
-  const [tnDistricts, setTnDistricts] = React.useState([])
-  const [selectedDistrict, setSelectedDistrict] = React.useState(23)
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const [tnData, setTnData] = useState([])
+  const [tnDataForDistrict, setTnDataForDistrict] = useState([])
+  const [tnAllianceColorCode, setTnAllianceColorCode] = useState({})
+  const [tnDistricts, setTnDistricts] = useState([])
+  // const [selectedDistrict, setSelectedDistrict] = React.useState(23)
 
   useEffect(() => {
     async function fetchTnStaticData() {
@@ -61,7 +61,7 @@ function Tamilnadu (props) {
     }
 
     async function fetchTnStaticDataForDistrict() {
-      const url = "http://localhost:8000/tamilnadu/static/" + selectedDistrict
+      const url = "http://localhost:8000/tamilnadu/static/" + props.selectedDistrict
       try {
         const tns = await fetch(url).then(res => res.json());
         console.log(tns.data)
@@ -71,17 +71,6 @@ function Tamilnadu (props) {
         console.log('Error', error)
       }
     }
-
-    // async function fetchTnAlliancesData() {
-    //   const url = "http://localhost:8000/tamilnadu/alliances" 
-    //   try {
-    //     const tns = await fetch(url).then(res => res.json());
-    //     setTnAlliances(tns.data)
-
-    //   } catch (error) {
-    //     console.log('Error', error)
-    //   }
-    // }
 
     async function fetchTnAlliancesColorCodeData() {
       const url = "http://localhost:8000/tamilnadu/allianceColorCode" 
@@ -110,8 +99,7 @@ function Tamilnadu (props) {
 
     fetchTnStaticData();
     fetchTnDistrictsData();
-    // fetchTnAlliancesData();
-    fetchTnStaticDataForDistrict();
+    // fetchTnStaticDataForDistrict();
     fetchTnAlliancesColorCodeData();
   }, []);
 
@@ -162,8 +150,8 @@ function Tamilnadu (props) {
 
   
   const fetchTnStaticDataForDistrict = async () => {
-      console.log(selectedDistrict)
-      const url = "http://localhost:8000/tamilnadu/static/" + selectedDistrict
+      console.log(props.selectedDistrict)
+      const url = "http://localhost:8000/tamilnadu/static/" + props.selectedDistrict
       try {
         const tns = await fetch(url).then(res => res.json());
         console.log(tns.data)
@@ -174,15 +162,14 @@ function Tamilnadu (props) {
       }
     }
   const handleDistrictSelect = async (dist) => {
-    // console.log(dist)
-    setSelectedDistrict(dist)
-    fetchTnStaticDataForDistrict()
+    // setSelectedDistrict(dist)
+    // fetchTnStaticDataForDistrict()
   }
     
     // console.log(props.selectedParty)
     return (
       <>
-        {tnDistricts.map((dist, d) => 
+        {/* {tnDistricts.map((dist, d) => 
           { return (
               <button className = {dist.district_id==selectedDistrict ? "districtSpanSelected" : "districtSpan"} 
                       key={dist.district_id} 
@@ -194,10 +181,11 @@ function Tamilnadu (props) {
               </button>
             )
           }
-        )}
+        )} */}
         <br/>
         <Button variant="text" onClick={handleClearAll}>Clear All </Button>
-
+        <>
+{/* 
         <TableContainer sx={{maxHeight: 400}}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -211,9 +199,6 @@ function Tamilnadu (props) {
                       fontSize: 20
                     }
                   }}>
-                <TableCell>
-                  S.No
-                </TableCell>
                 
                 <TableCell>
                   District
@@ -238,11 +223,64 @@ function Tamilnadu (props) {
             </TableHead>
 
             <TableBody>
-              
+              {tnData.map((row, r) => {
+                return (
+                  row['district_id'] == selectedDistrict &&
+                  <TableRow hover role="checkbox" tabIndex={-1} 
+                    style = {{'background': tnAllianceColorCode[row.prediction_alliance_id_next]}}
+                    key = {r}
+                    code = {row.code}
+                  >
+
+                    <TableCell>
+                      {row.district}
+                    </TableCell>
+
+                    <TableCell>
+                      {row.constituency_name}
+                    </TableCell>
+
+                    <TableCell>
+                      {row.winner_alliance_prev}
+                    </TableCell>
+
+                    <TableCell>
+                      {row.winner_party_prev}
+                    </TableCell>
+
+                    <TableCell>
+                      {row.prediction_alliance_id_next == -1 ?
+                        <button className="predictButton"
+                          id = {row.constituency_id}
+                          name = {row.constituency_name}
+                          onClick={(e) => {
+                            handlePrediction(e, row.constituency_id, 'update');
+                          }}
+                        >
+                          Click to Predict
+                        </button>
+                        :
+                        <button
+                          id = {row.constituency_id}
+                          name = {row.constituency_name}
+                          style={{ backgroundColor: tnAllianceColorCode[row.prediction_alliance_id_next], color: 'black', padding: '10px 20px', border: '2px solid black', borderRadius: '4px', cursor: 'pointer' }} 
+                          onClick={(e) => {
+                            handlePrediction(e, row.constituency_id, 'reset');
+                          }}
+                        >
+                          Reset Prediction
+                        </button>
+                      }
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+              <TableRow>
+              </TableRow>
             </TableBody>
           </Table>
-        </TableContainer>
-        
+        </TableContainer> */}
+        </>
 
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
@@ -272,11 +310,10 @@ function Tamilnadu (props) {
               </TableHead>
               <TableBody>
                 {tnData
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, r) => {
-                    
-                    // tnData['district_id'] == selectedDistrict &&
                     return (
+                      row['district_id'] == props.selectedDistrict &&
                       <TableRow hover role="checkbox" tabIndex={-1} 
                         style = {{'background': tnAllianceColorCode[row.prediction_alliance_id_next]}}
                         key = {r}
@@ -329,7 +366,7 @@ function Tamilnadu (props) {
               </TableBody>
             </Table>
           </TableContainer>
-          <TablePagination
+          {/* <TablePagination
             rowsPerPageOptions={[50, 100]}
             component="div"
             count={tnData.length}
@@ -337,7 +374,7 @@ function Tamilnadu (props) {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          /> */}
         </Paper>
       </>
     )
