@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 tn_alliances = [
-    {'alliance_id': -1, 'alliance_name': 'Unknown', 'colorcode': "#5B5C5B"},
+    {'alliance_id': -1, 'alliance_name': 'Unknown', 'colorcode': "#D8DAD8"},
     {'alliance_id': 1, 'alliance_name': 'DMK+', 'colorcode': '#FF0000'},
     {'alliance_id': 2, 'alliance_name': 'NDA', 'colorcode': '#F97D09'},
     {'alliance_id': 3, 'alliance_name': 'TVK', 'colorcode': '#FFFF00'},
