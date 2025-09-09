@@ -1,30 +1,4 @@
-.districtSpanSelected {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 10px;
-    width: auto;
-    background-color: rgb(4, 60, 12);
-    color: rgb(225, 229, 230);
-    border-radius: '50px';
-    display: inline-flex;
-    /* display: grid; */
-}
 
-.districtSpan {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 10px;
-    width: auto;
-    background-color: rgb(13, 135, 30);
-    color: rgb(225, 229, 230);
-    border-radius: '50px';
-    display: inline-flex;
-    /* display: grid; */
-}
-
-.districtSpan:hover {
-    background-color: rgb(12, 162, 185);
-}
 
 .predictButton {
     background-color: #4CAF50;

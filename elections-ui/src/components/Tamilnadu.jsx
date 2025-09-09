@@ -161,32 +161,12 @@ function Tamilnadu (props) {
         console.log('Error', error)
       }
     }
-  const handleDistrictSelect = async (dist) => {
-    // setSelectedDistrict(dist)
-    // fetchTnStaticDataForDistrict()
-  }
     
-    // console.log(props.selectedParty)
     return (
       <>
-        {/* {tnDistricts.map((dist, d) => 
-          { return (
-              <button className = {dist.district_id==selectedDistrict ? "districtSpanSelected" : "districtSpan"} 
-                      key={dist.district_id} 
-                      onClick={(e) => {
-                        handleDistrictSelect(dist.district_id)
-                      }}
-                      >
-                {dist.district_name}
-              </button>
-            )
-          }
-        )} */}
         <br/>
         <Button variant="text" onClick={handleClearAll}>Clear All </Button>
-        <>
-{/* 
-        <TableContainer sx={{maxHeight: 400}}>
+        <TableContainer sx={{maxHeight: 1000}}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow 
@@ -225,26 +205,29 @@ function Tamilnadu (props) {
             <TableBody>
               {tnData.map((row, r) => {
                 return (
-                  row['district_id'] == selectedDistrict &&
-                  <TableRow hover role="checkbox" tabIndex={-1} 
-                    style = {{'background': tnAllianceColorCode[row.prediction_alliance_id_next]}}
+                  row['district_id'] == props.selectedDistrict &&
+                  <TableRow 
+                    style = {{'maxheight': '10px', 'background': tnAllianceColorCode[row.prediction_alliance_id_next]}}
                     key = {r}
                     code = {row.code}
                   >
-
-                    <TableCell>
+                    <TableCell
+                    style = {{width: '15%'}}>
                       {row.district}
                     </TableCell>
 
-                    <TableCell>
+                    <TableCell 
+                    style = {{width: '30%'}}>
                       {row.constituency_name}
                     </TableCell>
 
-                    <TableCell>
+                    <TableCell
+                    style = {{width: '20%'}}>
                       {row.winner_alliance_prev}
                     </TableCell>
 
-                    <TableCell>
+                    <TableCell
+                    style = {{width: '20%'}}>
                       {row.winner_party_prev}
                     </TableCell>
 
@@ -260,10 +243,10 @@ function Tamilnadu (props) {
                           Click to Predict
                         </button>
                         :
-                        <button
+                        <button className="predictButton"
                           id = {row.constituency_id}
                           name = {row.constituency_name}
-                          style={{ backgroundColor: tnAllianceColorCode[row.prediction_alliance_id_next], color: 'black', padding: '10px 20px', border: '2px solid black', borderRadius: '4px', cursor: 'pointer' }} 
+                          style={{ backgroundColor: tnAllianceColorCode[row.prediction_alliance_id_next], color: 'black', border: '2px solid black', borderRadius: '4px'}} 
                           onClick={(e) => {
                             handlePrediction(e, row.constituency_id, 'reset');
                           }}
@@ -279,103 +262,7 @@ function Tamilnadu (props) {
               </TableRow>
             </TableBody>
           </Table>
-        </TableContainer> */}
-        </>
-
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow
-                sx={{
-                      "& th": {
-                      color: '#f1f1f7ff',
-                      backgroundColor: '#0f0fd4ff',
-                      font: 'bold',
-                      fontfamily: 'Arial',
-                      fontSize: 20
-                    }
-                  }}
-                >
-                  {columns.map((column, c) => (
-                    <TableCell
-                      key={c}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth, font: 'bold' }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tnData
-                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row, r) => {
-                    return (
-                      row['district_id'] == props.selectedDistrict &&
-                      <TableRow hover role="checkbox" tabIndex={-1} 
-                        style = {{'background': tnAllianceColorCode[row.prediction_alliance_id_next]}}
-                        key = {r}
-                        code = {row.code}
-                      >
-                        {columns.map((column, i) => {
-                          return (
-                            row[column.id] == 'district' ?
-                              <TableCell key={i} align={column.align}>
-                                {row[column.id]}
-                              </TableCell>
-                            : column.id == 'winner_alliance_id_prev' ?
-                              <TableCell key={i} align={column.align}>
-                                {row[column.id]}
-                              </TableCell>
-                            :column.id == 'prediction_2026' ?
-                              <TableCell key={i} align={column.align}>
-                                {row.prediction_alliance_id_next == -1 ?
-                                <button className="predictButton"
-                                  id = {row.constituency_id}
-                                  name = {row.constituency_name}
-                                  onClick={(e) => {
-                                    handlePrediction(e, row.constituency_id, 'update');
-                                  }}
-                                >
-                                  Click to Predict
-                                </button>
-                                :
-                                  <button
-                                  id = {row.constituency_id}
-                                  name = {row.constituency_name}
-                                  style={{ backgroundColor: tnAllianceColorCode[row.prediction_alliance_id_next], color: 'black', padding: '10px 20px', border: '2px solid black', borderRadius: '4px', cursor: 'pointer' }} 
-                                  onClick={(e) => {
-                                    handlePrediction(e, row.constituency_id, 'reset');
-                                  }}
-                                >
-                                  Reset Prediction
-                                </button>
-                                }
-                              
-                            </TableCell>
-                            :<TableCell key={i} align={column.align}>
-                              {row[column.id]}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          {/* <TablePagination
-            rowsPerPageOptions={[50, 100]}
-            component="div"
-            count={tnData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          /> */}
-        </Paper>
+        </TableContainer>
       </>
     )
 }

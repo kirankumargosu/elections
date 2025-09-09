@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import '../css/ElectionMain.css'
 
 import Tamilnadu from '../components/Tamilnadu'
 import Mast from '../components/Mast'
@@ -60,18 +61,10 @@ function ElectionMain() {
             <Mast />
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
-                    <TableRow sx={{
-                        "& th": {
-                        color: '#f1f1f7ff',
-                        backgroundColor: '#0c4a13ff',
-                        font: 'bold',
-                        fontfamily: 'Arial',
-                        fontSize: 16
-                        }
-                    }}>  
-                        <TableCell align="center" width={"20%"}>Alliances</TableCell>
-                        <TableCell align="center" width={"60%"}>Prediction</TableCell>
-                        <TableCell align="center" width={"20%"}>Parties</TableCell>
+                    <TableRow style = {{backgroundColor:"#1b1b1b"}}>  
+                        <TableCell style = {{color:"#f3f3daff", fontSize:"20px", fontWeight:"bold"}} align="center" width={"20%"}>Alliances</TableCell>
+                        <TableCell style = {{color:"#f3f3daff", fontSize:"20px", fontWeight:"bold"}} align="center" width={"60%"}>Prediction</TableCell>
+                        <TableCell style = {{color:"#f3f3daff", fontSize:"20px", fontWeight:"bold"}}  align="center" width={"20%"}>Parties</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

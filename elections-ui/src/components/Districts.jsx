@@ -1,5 +1,6 @@
-import { use, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
+import  '../css/Districts.css'
+ 
 export default function Districts(props){
     const [tnDistricts, setTnDistricts] = useState([])
     const [selectedDistrict, setSelectedDistrict] = useState(23)
