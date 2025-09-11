@@ -712,6 +712,44 @@ async def get_tnStatic() -> dict:
     return {"data": 
             tn_data}
 
+@app.get("/tamilnadu/prevResults", tags=["prevResults"])
+async def get_tnPrevResults() -> dict:
+
+    # data = []
+    global tn_data
+    tn_data = []
+    for item in tn_static:
+        alliance_name = ''
+        party_name = ''
+        district_name = ''
+
+        for d in tn_districts:
+            if (d['district_id'] == item['district_id']):
+                district_name = d['district_name']
+                break
+        for a in tn_alliances:
+            if (a['alliance_id'] == item['winner_alliance_id_prev']):
+                alliance_name = a['alliance_name']
+                break
+        
+        for p in tn_parties:
+            if (p['party_id'] == item['winner_party_id_prev']):
+                party_name = p['party_name']
+                break
+
+        tn_data.append(
+            {'district_id': item['district_id'],
+             'district': district_name,
+             'constituency_id': item['constituency_id'],
+             'constituency_name': tn_constituencies[item['constituency_id']],
+             'winner_alliance_prev': alliance_name,
+             'winner_party_prev': party_name,
+             "prediction_alliance_id_next": item['winner_alliance_id_prev']
+               }
+        )
+        # print("tn data >>>>", tn_data)
+    return {"data": 
+            tn_data}
 @app.post("/tamilnadu/updatePrediction", tags=["updatePrediction"])
 async def update_prediction(data: dict) -> dict:
     # print("to update >>>>", data)

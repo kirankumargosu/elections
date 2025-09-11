@@ -40,13 +40,8 @@ const columns = [
   },
 ];
 function Tamilnadu (props) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [tnData, setTnData] = useState([])
-  const [tnDataForDistrict, setTnDataForDistrict] = useState([])
   const [tnAllianceColorCode, setTnAllianceColorCode] = useState({})
-  const [tnDistricts, setTnDistricts] = useState([])
-  // const [selectedDistrict, setSelectedDistrict] = React.useState(23)
 
   useEffect(() => {
     async function fetchTnStaticData() {
@@ -147,6 +142,17 @@ function Tamilnadu (props) {
         console.log('Error', error)
     }
   }
+  const handlePrevElectionClick = async () => {
+          const url = "http://localhost:8000/tamilnadu/prevResults"
+      try {
+        const tns = await fetch(url).then(res => res.json());
+        setTnData(tns.data)
+        props.onClickPredict()
+
+      } catch (error) {
+        console.log('Error', error)
+      }
+  }
 
   
   const fetchTnStaticDataForDistrict = async () => {
@@ -166,6 +172,8 @@ function Tamilnadu (props) {
       <>
         <br/>
         <Button variant="text" onClick={handleClearAll}>Clear All </Button>
+        <Button variant="text" onClick={handlePrevElectionClick}>Prev. Result</Button>
+
         <TableContainer sx={{maxHeight: 1000}}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
