@@ -42,7 +42,7 @@ function Tamilnadu (props) {
 
   const handlePrediction = async (e, constituency_id, mode) => {
     try{
-        const url = process.env.REACT_APP_API_URL + "tamilnadu/updatePrediction/" 
+        const url = process.env.REACT_APP_API_URL + "tamilnadu/updatePrediction" 
         const tns = await fetch(url, {
             method: "POST",
             headers: {
