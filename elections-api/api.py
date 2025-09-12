@@ -625,18 +625,22 @@ tn_static = [
 tn_data = []
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
+    print("root called")
+    print("returning >>>> ", "Elections-Root.")
     return {"message": "Elections-Root."}
 
 @app.get("/tamilnadu/districts", tags=["districts"])
 async def get_tnDistricts() -> dict:
+    print("districts called")
+    print("returning >>>> ", tn_districts)
     return {"data": tn_districts}
 
 @app.get("/tamilnadu/static/{district_id}", tags=["staticForDistrict"])
 async def get_tnStaticForDistrict(district_id) -> dict:
+    print("district id called for ", district_id)
     data = []
     global tn_data
     tn_data = []
-    print("district id called")
     print(district_id)
     for item in tn_static:
         alliance_name = ''
@@ -668,14 +672,15 @@ async def get_tnStaticForDistrict(district_id) -> dict:
                 }
             )
         # print("tn data >>>>", tn_data)
-    return {"data": 
-            tn_data}
+    print("returning >>>>", tn_data)
+    return {"data": tn_data}
 # @app.get("/tamilnadu/alliancePartyData/{alliance_id}", tags=["alliancePartyData"])
 
 
 
 @app.get("/tamilnadu/static", tags=["tnstatic"])
 async def get_tnStatic() -> dict:
+    print("static called")
     # data = []
     global tn_data
     tn_data = []
@@ -709,11 +714,12 @@ async def get_tnStatic() -> dict:
                }
         )
         # print("tn data >>>>", tn_data)
-    return {"data": 
-            tn_data}
+    print("returning >>>> ", tn_data)
+    return {"data": tn_data}
 
 @app.get("/tamilnadu/prevResults", tags=["prevResults"])
 async def get_tnPrevResults() -> dict:
+    print("prevResults called")
 
     # data = []
     global tn_data
@@ -748,41 +754,50 @@ async def get_tnPrevResults() -> dict:
                }
         )
         # print("tn data >>>>", tn_data)
-    return {"data": 
-            tn_data}
+    print("returning >>>> ", tn_data)
+    return {"data": tn_data}
+
 @app.post("/tamilnadu/updatePrediction", tags=["updatePrediction"])
 async def update_prediction(data: dict) -> dict:
+    # print("updatePrediction called")
     # print("to update >>>>", data)
     for item in tn_data:
         if item['constituency_id'] == data['constituency_id']:
             item['prediction_alliance_id_next'] = data['prediction_alliance_id_next']
             # print("updated >>>> ", item)
             break
-    return{
-        "data" : tn_data
+    
+    print("returning >>>> ", tn_data)
+    return{ "data" : tn_data
     }
 
 @app.get("/tamilnadu/allianceColorCode", tags=["tnAllianceColorCode"])
 async def get_tnAllianceColorCode() -> dict:
+    print("allianceColorCode called")
     data = {}
     # print(tn_alliances)
     for alliance in tn_alliances:
         data[alliance['alliance_id']] = alliance['colorcode']
         
     # print(data)
+    print("returning >>>> ", data)
     return {"data": data}
 
 @app.get("/tamilnadu/alliances", tags=["allianceData"])
 async def get_tnAlliances() -> dict:
+    print("alliances called")
     # print(tn_alliances)
     data = []
     for a in tn_alliances:
         if (a['alliance_id'] != -1):
             data.append( {'alliance_id': a['alliance_id'], 'alliance_name': a['alliance_name'], 'colorcode': a['colorcode']})
+    
+    print("returning >>>> ", data)
     return {"data": data}
 
 @app.get("/tamilnadu/alliancePartyData/{alliance_id}", tags=["alliancePartyData"])
 async def get_tnAlliancePartyData(alliance_id) -> dict:
+    print("alliancePartyData called for ", alliance_id)
     data = []
     for alliancePartyId in tn_alliance_map[int(alliance_id)]:
         for p in tn_parties:
@@ -792,6 +807,7 @@ async def get_tnAlliancePartyData(alliance_id) -> dict:
 
 @app.get("/tamilnadu/predictedData", tags=["tnPredictedData"])
 async def get_tnPredictedData() -> dict:
+    print("predictedData called")
     data = []
     dataDict = {}
     # print(len(tn_data))
@@ -812,33 +828,15 @@ async def get_tnPredictedData() -> dict:
             'value': dataDict[d],
             'color': colorcode
         })
-    print(data)
 
+    print("returning >>>> ", data)
     return {"data": data}
 
 @app.post("/tamilnadu/resetPrediction", tags=["resetPrediction"])
 async def reset_prediction() -> dict:
+    print("resetPrediction called")
     for item in tn_data:
         item['prediction_alliance_id_next'] = -1
-    return{
-        "data" : tn_data
-    }
-# def scrap():
-#     # print(tn_static)
-#     data = []
-#     dataDict = {}
-#     for item in tn_static:
-#         alliance_name = [a for a in tn_alliances if a['alliance_id'] == str(item['prediction_alliance_id_next'])][0]['alliance_name']
-#         dataDict[alliance_name] = dataDict.get(alliance_name, 0) + 1
-#     print(dataDict)
-
-#     for d in dataDict:
-#         colorcode = [a for a in tn_alliances if a['alliance_name'] == d][0]['colorcode']
-#         data.append({
-#             'label': d,
-#             'value': dataDict[d],
-#             'color': colorcode
-#         })
-#     print(data)
-# if __name__ == "__main__":
-#     scrap()
+    
+    print("returning >>>> ", tn_data)
+    return{ "data" : tn_data}

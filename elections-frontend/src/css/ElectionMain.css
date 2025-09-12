@@ -1,0 +1,14 @@
+.tableHeader {
+    background-color: rgb(105, 119, 112);
+    font-size: medium;
+    color: rgb(214, 16, 16);
+    font-weight: bold;
+    max-height: 10px;
+}
+.tableRow {
+    background-color: rgb(218, 223, 218);
+    font-size: small;
+    color: rgb(224, 29, 29);
+    font-weight: normal;
+    max-height: 10px;
+}
