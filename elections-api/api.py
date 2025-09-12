@@ -1,15 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+import os
 app = FastAPI()
 origins = [
+    os.environ.get("FRONTEND_URL", "http://localhost:3000"),
     "http://localhost:3000",
     "localhost:3000",
     "http://localhost:5173/",
     "http://192.168.1.181:3000",
     "192.168.1.181:3000",
     "192.168.0.252:3000",
-    "86.1.96.160:3000",
+    "http://86.1.96.160:3000",
     "*"
 ]
 
