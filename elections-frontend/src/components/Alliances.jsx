@@ -13,7 +13,7 @@ export default function Alliances(props) {
 
     useEffect(() => {
         async function fetchAllianceData() {
-            const url = "http://localhost:8000/tamilnadu/alliances"
+            const url = process.env.REACT_APP_API_URL + "tamilnadu/alliances"
             try {
                 const tnAllianceData = await fetch(url).then(res => res.json());
                 // console.log("tnAllianceData ", tnAllianceData)

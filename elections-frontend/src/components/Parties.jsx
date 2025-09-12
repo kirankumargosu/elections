@@ -11,7 +11,7 @@ export default function Parties(props) {
 
     useEffect(() => {
         async function fetchAlliancePartyData() {
-            const url = "http://localhost:8000/tamilnadu/alliancePartyData/"+props.selectedAlliance
+            const url = process.env.REACT_APP_API_URL + "tamilnadu/alliancePartyData/" + props.selectedAlliance
             try {
                 const tnParties = await fetch(url).then(res => res.json());
                 // console.log(tnParties)
@@ -38,28 +38,6 @@ export default function Parties(props) {
             )
           }
         )}
-            {/* {parties.map( (party) => {
-                return (
-                          <div key={party.party_id}>
-                            <button 
-                                style={{ backgroundColor:  party.colorcode,
-                                         color: '#000000',
-                                         font: 'bold',
-                                         width : '100px',
-                                         marginRight: '5px',
-                                         marginBottom: '5px'
-                                      }} 
-                                key={party.party_id}
-                                id={party.party_id}
-                                name={party.party_name} 
-                                >
-                                  {party.party_name}
-                                  
-                            </button>
-                            </div>
-                         )
-            })} */}
-      {/* <br/> */}
     </>
   );
 }

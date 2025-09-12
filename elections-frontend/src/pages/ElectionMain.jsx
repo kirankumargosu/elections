@@ -21,7 +21,7 @@ function ElectionMain() {
 
     useEffect(() => {
         async function fetchPredictedData() {
-            const url = "http://localhost:8000/tamilnadu/predictedData"
+            const url = process.env.REACT_APP_API_URL + "tamilnadu/predictedData"
             try {
                 const tnPredictedData = await fetch(url).then(res => res.json());
                 setPredictedData(tnPredictedData.data)
@@ -35,7 +35,7 @@ function ElectionMain() {
 
     const handlePredictonData = async () => {
         // console.log("Fetching predicted data from handlePrediction")
-        const url = "http://localhost:8000/tamilnadu/predictedData"
+        const url = process.env.REACT_APP_API_URL + "tamilnadu/predictedData"
             try {
                 const tnPredictedData = await fetch(url).then(res => res.json());
                 setPredictedData(tnPredictedData.data)

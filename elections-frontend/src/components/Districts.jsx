@@ -13,7 +13,7 @@ export default function Districts(props){
 
     useEffect(() => {
         async function fetchTnDistrictsData() {
-            const url = "http://localhost:8000/tamilnadu/districts" 
+            const url = process.env.REACT_APP_API_URL + "tamilnadu/districts"
             try {
                 const tns = await fetch(url).then(res => res.json());
                 // list.sort((a, b) => (a.qty > b.qty) ? 1 : -1)

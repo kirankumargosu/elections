@@ -15,7 +15,7 @@ function Tamilnadu (props) {
 
   useEffect(() => {
     async function fetchTnStaticData() {
-      const url = "http://localhost:8000/tamilnadu/static"
+      const url = process.env.REACT_APP_API_URL + "tamilnadu/static/" 
       try {
         const tns = await fetch(url).then(res => res.json());
         setTnData(tns.data)
@@ -26,7 +26,7 @@ function Tamilnadu (props) {
     }
 
     async function fetchTnAlliancesColorCodeData() {
-      const url = "http://localhost:8000/tamilnadu/allianceColorCode" 
+      const url = process.env.REACT_APP_API_URL + "tamilnadu/allianceColorCode/" 
       try {
         const tns = await fetch(url).then(res => res.json());
         setTnAllianceColorCode(tns.data)
@@ -42,7 +42,8 @@ function Tamilnadu (props) {
 
   const handlePrediction = async (e, constituency_id, mode) => {
     try{
-        const tns = await fetch("http://localhost:8000/tamilnadu/updatePrediction", {
+        const url = process.env.REACT_APP_API_URL + "tamilnadu/updatePrediction/" 
+        const tns = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -60,7 +61,8 @@ function Tamilnadu (props) {
 
   const handleClearAll = async () => {
     try{
-      const tns = await fetch("http://localhost:8000/tamilnadu/resetPrediction", {
+      const url = process.env.REACT_APP_API_URL + "tamilnadu/resetPrediction/" 
+      const tns = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -76,15 +78,15 @@ function Tamilnadu (props) {
     }
   }
   const handlePrevElectionClick = async () => {
-          const url = "http://localhost:8000/tamilnadu/prevResults"
-      try {
-        const tns = await fetch(url).then(res => res.json());
-        setTnData(tns.data)
-        props.onClickPredict()
+    const url = process.env.REACT_APP_API_URL + "tamilnadu/prevResults"
+    try {
+      const tns = await fetch(url).then(res => res.json());
+      setTnData(tns.data)
+      props.onClickPredict()
 
-      } catch (error) {
-        console.log('Error', error)
-      }
+    } catch (error) {
+      console.log('Error', error)
+    }
   }
     
     return (
