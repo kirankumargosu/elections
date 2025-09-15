@@ -509,7 +509,7 @@ tn_static = [
         {'district_id': 20, 'constituency_id': 136, 'constituency_name': 'Krishnarayapuram(SC)', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 20, 'constituency_id': 137, 'constituency_name': 'Kulithalai', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
 
-        {'district_id': 21, 'constituency_id': 138, 'constituency_name': 'Manapaarai', 'winner_party_id_prev': 9, 'winner_alliance_id_prev': 4, 'prediction_alliance_id_next': -1},
+        {'district_id': 21, 'constituency_id': 138, 'constituency_name': 'Manapaarai', 'winner_party_id_prev': 9, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 21, 'constituency_id': 139, 'constituency_name': 'Srirangam', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 21, 'constituency_id': 140, 'constituency_name': 'Tiruchirappalli (West)', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 21, 'constituency_id': 141, 'constituency_name': 'Tiruchirappalli (East)', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
@@ -550,7 +550,7 @@ tn_static = [
 
         {'district_id': 28, 'constituency_id': 170, 'constituency_name': 'Thiruvidaimarudur(SC)', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 28, 'constituency_id': 171, 'constituency_name': 'Kumbakonam', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
-        {'district_id': 28, 'constituency_id': 172, 'constituency_name': 'Papanasam', 'winner_party_id_prev': 9, 'winner_alliance_id_prev': 4, 'prediction_alliance_id_next': -1},
+        {'district_id': 28, 'constituency_id': 172, 'constituency_name': 'Papanasam', 'winner_party_id_prev': 9, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 28, 'constituency_id': 173, 'constituency_name': 'Thiruvaiyaru', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 28, 'constituency_id': 174, 'constituency_name': 'Thanjavur', 'winner_party_id_prev': 1, 'winner_alliance_id_prev': 1, 'prediction_alliance_id_next': -1},
         {'district_id': 28, 'constituency_id': 175, 'constituency_name': 'Orathanadu', 'winner_party_id_prev': 4, 'winner_alliance_id_prev': 2, 'prediction_alliance_id_next': -1},
